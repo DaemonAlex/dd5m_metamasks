@@ -1,11 +1,14 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
--- Useable mask item
-QBCore.Functions.CreateUseableItem('mask_example', function(source, item)
-    local src = source
-    -- Assuming maskId and maskType are stored in item metadata. Adjust these keys according to your actual item structure.
-    TriggerClientEvent('meta_masks:applyMask', src, item.info.maskId, item.info.maskType)
+-- Make a mask item usable
+QBCore.Functions.CreateUseableItem('mask_example', function(source)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if Player then
+        -- Assuming 'mask_example' is a generic mask item.
+        -- You'll replace 'mask_example' with your actual mask item names.
+        -- The maskId and maskType can be hardcoded for default masks, or use metadata if available.
+        TriggerClientEvent('meta_masks:applyMask', source, 1, 0) -- Example maskId and maskType.
+    end
 end)
 
--- Example for creating more useable mask items. Repeat as necessary for each mask type.
--- QBCore.Functions.CreateUseableItem('another_mask_item', function(source, item) ...
+-- Repeat the above block for each type of mask item, changing 'mask_example', maskId, and maskType accordingly.
