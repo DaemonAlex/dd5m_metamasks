@@ -1,23 +1,21 @@
---Server transaction handler.  Edit as required.
-lib.callback.register('dd5m_metamasks:server:handleTransaction', function(source, amount, maskData)
-    local Player = exports.qbx_core:GetPlayer(source)
-    local cash = Player.PlayerData.money.cash
-    local bank = Player.PlayerData.money.bank
-    local CanCarry = exports.ox_inventory:CanCarryItem(source, 'meta_mask', 1)
-    if CanCarry then
-        if cash >= amount then
-            Player.Functions.RemoveMoney("cash", amount, 'Vespucci Movie Masks')
-            local itemAdded = exports.ox_inventory:AddItem(source, 'meta_mask', 1, maskData, nil, nil)
-            return itemAdded
-        elseif bank >= amount then
-            Player.Functions.RemoveMoney("bank", amount, 'Vespucci Movie Masks')
-            local itemAdded = exports.ox_inventory:AddItem(source, 'meta_mask', 1, maskData, nil, nil)
-            return itemAdded
-        else
-            lib.notify(source, {title = 'Vespucci Movie Masks', description = 'Not enough money', type = 'error', duration = 5000})
-            return false
-        end
+local QBCore = exports['qb-core']:GetCoreObject()
+
+RegisterNetEvent('meta_masks:purchaseMask', function(maskId, price)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+
+    if Player.Functions.RemoveMoney('cash', price, "purchased-mask") then
+        -- Assuming the mask purchase is successful, add the mask to the player's inventory.
+        -- The item name should match the one used in QBCore.Functions.CreateUseableItem.
+        -- 'mask_example' is a placeholder; replace it with your actual mask item names.
+        -- Additionally, you might want to pass specific data for the mask if needed (e.g., maskId).
+        Player.Functions.AddItem('mask_example', 1)
+        TriggerClientEvent('QBCore:Notify', src, 'Mask purchased successfully!', 'success')
     else
-        lib.notify(source, {title = 'Vespucci Movie Masks', description = 'You cannot carry any more.', type = 'error', duration = 5000})
+        TriggerClientEvent('QBCore:Notify', src, 'Not enough money.', 'error')
     end
 end)
+
+-- We may want to create separate events for each mask or handle all purchases through this single event,
+-- adjusting the mask item added based on the passed maskId.
+
