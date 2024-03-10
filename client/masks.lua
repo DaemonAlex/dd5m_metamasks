@@ -1,12 +1,12 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
--- Example server-side logic for managing mask items
--- The detailed implementation would need to adapt original functionalities to QBCore and ox_inventory
-QBCore.Functions.CreateUseableItem('mask_item', function(source, item)
-    local Player = QBCore.Functions.GetPlayer(source)
-    if Player then
-        -- Trigger client event to apply the mask
-        -- Placeholder for actual implementation
-        TriggerClientEvent('dd5m-metamasks:applyMask', source, item)
-    end
+-- Example useable item creation for a mask
+QBCore.Functions.CreateUseableItem('mask_example', function(source, item)
+    local src = source
+    -- Triggering the client event to apply the mask
+    -- We'll need to adjust the parameters based on the masks we want and how they are identified (e.g., item metadata)
+    TriggerClientEvent('meta_masks:applyMask', src, item.data.maskId, item.data.maskType)
 end)
+
+-- Add more `CreateUseableItem` calls here for each mask item you have
+
