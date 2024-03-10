@@ -1,60 +1,60 @@
-# dD5M Meta Masks
-A FiveM mask management resource with integrated shops functionality.  Resource provides masks as inventory items through functionality provided by [ox_inventory](https://github.com/overextended/ox_inventory). Resource can be used independent of any framework by giving items with metadata, or by integrating inbuilt shop system with your framework methods.  Out of the box the resource is compatible with QBOX.
----
-## ✨ Features
-- Physical Mask Items
-- Mask removed on inventory removal
-- Most if not all default mask items configured in default config. (Some items are commented out in config as they either do not appear or I personally do not use the mask variants because they are not a mask or of poor quality.  Adjust as you like.)
-- Optional support for beards or other cosmetics commonly used in the `berd` mask clothing slot.  If enabled whitelisted drawables will be stored to player state bag and restored on mask removal
-- In built shop system including item images provided by Sploom of [envRP](https://envrp.games)
+# QBCore Meta Masks Integration
 
-## 🎞️ Showcase
-[Preview Clip](https://youtu.be/qXa2doVQ--4)
+Integrate a comprehensive mask feature into your QBCore-based FiveM server, utilizing `ox_inventory` for an immersive and seamless experience. This resource allows players to purchase, equip, and interact with a wide variety of masks directly through their inventory.
 
-![Menu](https://i.imgur.com/OdkvIOb.png)
-![Inventory](https://i.imgur.com/Vp9QtuN.png)
+## Installation
 
-## 💾 Download
-[https://github.com/dD5M/dd5m_metamasks](https://github.com/dD5M/dd5m_metamasks)
+1. **Clone or Download the Resource**
+   
+   Ensure you have the latest version by cloning this repository or downloading it as a ZIP and extracting it to your server's resources folder.
 
-## ⭐ Dependencies
-- [https://github.com/overextended/ox_inventory](https://github.com/overextended/ox_inventory)
-- [https://github.com/overextended/ox_lib](https://github.com/overextended/ox_lib)
+2. **Resource Setup**
+   
+   Copy the extracted folder into your server's resources directory. Rename the folder to `qb-meta-masks` for consistency in resource calls.
 
-## 🦆 Optional Dependencies
-- [https://github.com/Qbox-project](https://github.com/Qbox-project)  
+3. **Configuration**
+   
+   Navigate to the `config` folder and open `config.lua`. Adjust the mask items, prices, and IDs as necessary to fit your server's inventory system.
 
-## 🛠️ Installation
-- The resource is configured out of the box with very little setup required, especially if you are using QBOX framework.
+4. **Dependency Installation**
+   
+   This resource requires `QBCore` and `ox_inventory`. Ensure both are installed and properly configured on your server.
 
-### Ox Inventory Item
-```
-	['meta_mask'] = {
-		weight = 200,
-		stack = false,
-		consume = 0,
-		client = {remove = function() exports.dd5m_metamasks:RemoveMaskItem() end},
-		server = {export = 'dd5m_metamasks.meta_mask'},
-		allowArmed = true,
-	},
-```
+5. **Resource Registration**
+   
+   Add the following line to your server.cfg file to register the resource:
 
-### Shops Framework Functions
-Edit the following function to suit your needs.  If you would like to disable shops you can comment out the lines indicated in the fxmanifest.lua.
-```
-lib.callback.register('dd5m_metamasks:server:handleTransaction', function(source, amount, maskData)
-```
+ensure qb-meta-masks
+## Usage
 
-### Config
-- Select your desired interaction option within `interactionOptions`.  If radial is disabled, the resource will default to keypress defined by `interactionOptions.key`.
-- Store locations are built dynamicly via the `storeLocations` config variable.
-- Add beard or other non mask components you want restored on mask removal in `whitelistDrawables`, or disable `drawableStateBags`.
-- Category menu options are bult dynamicly via the `categoryLabel` config variable.
-- Add any addon masks you would like to utilize with this resource at the bottom of the config where the end of GTA variants is indicated.
+- **Purchasing Masks**: Players can purchase masks from designated shop locations or through any integrated shop system you have on your server.
 
-## 🆘 Support
-- **Discord** [https://discord.gg/t6WcBnpe9H](https://discord.gg/t6WcBnpe9H)
+- **Equipping Masks**: Once purchased, masks can be equipped directly from the player's `ox_inventory` by using the mask item.
 
-## Credits
-### Sploom - [envRP](https://envrp.games)
- - All image work.
+- **Removing Masks**: Players can remove equipped masks by using the `/removemask` command.
+
+## Features
+
+- **Wide Selection of Masks**: Includes a variety of default GTA V masks, easily extendable to include custom masks.
+
+- **Integrated Shop System**: Utilize the server-side `shops.lua` script to integrate mask purchasing into your existing shop systems.
+
+- **Direct Inventory Management**: Masks are managed through the `ox_inventory` system, providing a seamless player experience.
+
+## Customization
+
+The `config.lua` file allows for easy customization of mask types, prices, and identifiers. Additional customization can be achieved by modifying the client and server scripts to adjust the functionality to your server's needs.
+
+## Support
+
+For support, questions, or contributions, please refer to the [GitHub Issues](https://github.com/your-github/qb-meta-masks/issues) section of this repository or join our Discord server.
+
+## Contributing
+
+Contributions are welcome! If you have improvements or bug fixes, please open a pull request with your changes.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
