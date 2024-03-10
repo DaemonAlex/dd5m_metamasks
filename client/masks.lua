@@ -8,5 +8,5 @@ QBCore.Functions.CreateUseableItem('mask_example', function(source, item)
     TriggerClientEvent('meta_masks:applyMask', src, item.data.maskId, item.data.maskType)
 end)
 
--- Add more `CreateUseableItem` calls here for each mask item you have
+-- Add more `CreateUseableItem` calls here for each mask item we have
 
