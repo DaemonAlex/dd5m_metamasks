@@ -1,12 +1,17 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
--- Example useable item creation for a mask
-QBCore.Functions.CreateUseableItem('mask_example', function(source, item)
-    local src = source
-    -- Triggering the client event to apply the mask
-    -- We'll need to adjust the parameters based on the masks we want and how they are identified (e.g., item metadata)
-    TriggerClientEvent('meta_masks:applyMask', src, item.data.maskId, item.data.maskType)
+-- Remove mask command
+RegisterCommand('removemask', function()
+    local ped = PlayerPedId()
+    SetPedComponentVariation(ped, 1, 0, 0, 2) -- Resets the mask component
+    QBCore.Functions.Notify("Mask removed.", "primary")
+end, false)
+
+-- Event from server to apply a mask
+RegisterNetEvent('meta_masks:applyMask', function(maskId, maskType)
+    local ped = PlayerPedId()
+    SetPedComponentVariation(ped, 1, maskId, maskType, 0) -- Apply mask variation
+    QBCore.Functions.Notify("Mask applied.", "success")
 end)
 
--- Add more `CreateUseableItem` calls here for each mask item we have
 
