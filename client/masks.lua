@@ -1,17 +1,26 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
--- Remove mask command
+-- Command to remove a mask
 RegisterCommand('removemask', function()
     local ped = PlayerPedId()
     SetPedComponentVariation(ped, 1, 0, 0, 2) -- Resets the mask component
     QBCore.Functions.Notify("Mask removed.", "primary")
 end, false)
 
--- Event from server to apply a mask
-RegisterNetEvent('meta_masks:applyMask', function(maskId, maskType)
-    local ped = PlayerPedId()
-    SetPedComponentVariation(ped, 1, maskId, maskType, 0) -- Apply mask variation
-    QBCore.Functions.Notify("Mask applied.", "success")
+-- Automatically applies a mask based on its item data
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    QBCore.Functions.GetPlayerData(function(PlayerData)
+        if PlayerData and PlayerData.items then
+            for _, item in pairs(PlayerData.items) do
+                if item and item.name == "mask" then
+                    local ped = PlayerPedId()
+                    SetPedComponentVariation(ped, 1, item.info.model, 0, 2)
+                    break
+                end
+            end
+        end
+    end)
 end)
+
 
 
